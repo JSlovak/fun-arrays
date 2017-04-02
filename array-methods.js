@@ -28,14 +28,13 @@ var hundredThousandairs = (dataset.filter(findBalance));
 
 function addRoundedValue (thing, index, array){
 
-  thing.rounded = Math.round(thing.amount);
-  return thing;
+  return { amount: thing.amount,
+            state: thing.state,
+            rounded: Math.round(thing.amount)
+          };
 }
 
 var roundedDollar = dataset.map(addRoundedValue);
-
-
-
 
 /*
   set a the `amount` value for each object in bankBalances
@@ -47,7 +46,21 @@ var roundedDollar = dataset.map(addRoundedValue);
     }
   assign the resulting array to `roundedDime`
 */
-var roundedDime = null;
+
+function roundToDime(thing, index, array){
+
+  function round(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+  }
+
+  thing.roundedDime = round(thing.amount, 1);
+  // console.log(thing);
+  return thing;
+
+}
+var roundedDime = dataset.map(roundToDime);
+console.log(roundedDime);
+
 
 // set sumOfBankBalances to the sum of all amounts in bankBalances
 var sumOfBankBalances = null;
