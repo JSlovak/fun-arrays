@@ -14,7 +14,6 @@ function findBalance (thing, index, array){
 var hundredThousandairs = (dataset.filter(findBalance));
 
 
-
 /*
   set a new key for each object in bankBalances named `rounded`
   the value of this key will be the `amount` rounded to the nearest dollar
@@ -26,7 +25,17 @@ var hundredThousandairs = (dataset.filter(findBalance));
     }
   assign the resulting array to `roundedDollar`
 */
-var roundedDollar = null;
+
+function addRoundedValue (thing, index, array){
+
+  thing.rounded = Math.round(thing.amount);
+  return thing;
+}
+
+var roundedDollar = dataset.map(addRoundedValue);
+
+
+
 
 /*
   set a the `amount` value for each object in bankBalances
