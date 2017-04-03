@@ -47,23 +47,27 @@ var roundedDollar = dataset.map(addRoundedValue);
   assign the resulting array to `roundedDime`
 */
 
-function roundToDime(thing, index, array){
-
-  function round(value, decimals) {
+function round(value, decimals) {
   return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
   }
 
+function roundToDime(thing, index, array){
+
   thing.roundedDime = round(thing.amount, 1);
-  // console.log(thing);
   return thing;
 
 }
 var roundedDime = dataset.map(roundToDime);
-console.log(roundedDime);
-
 
 // set sumOfBankBalances to the sum of all amounts in bankBalances
-var sumOfBankBalances = null;
+
+var sumOfBankBalances = dataset.reduce(function(prev, curr, index, array) {
+  var trueNum = Number(curr.amount);
+  console.log(trueNum);
+  return round(prev + trueNum, 2);
+
+}, 0);
+
 
 /*
   set sumOfInterests to the sum of the 18.9% interest
